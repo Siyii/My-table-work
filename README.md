@@ -1,29 +1,18 @@
 # my-table-work
 
-## Project setup
-```
-yarn install
-```
+## Table
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+| 属性            | 说明             | 类型   | 默认值            |
+| --------------- | ---------------- | ------ | ----------------- |
+| tableData       | 显示的数据       | array  | []                |
+| columnFieldList | 表头数据         | array  | []                |
+| emptyText       | 数据为空时提示语 | string | 暂无数据          |
+| sort            | 配置列的排序     | Object | order: asc / desc |
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Pagination
 
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+| 属性        | 说明     | 类型   | 默认值 |
+| ----------- | -------- | ------ | ------ |
+| size        | 页码条数 | number | 10     |
+| total       | 总条数   | number | -      |
+| currentPage | 当前页码 | number | 1      |
