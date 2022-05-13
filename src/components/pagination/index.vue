@@ -40,15 +40,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  onMounted,
-  toRefs,
-  watch,
-  computed,
-  toRef,
-} from 'vue';
+import { defineComponent, ref, toRefs, computed, toRef } from 'vue';
 import defaultProps from './defaults';
 
 export default defineComponent({

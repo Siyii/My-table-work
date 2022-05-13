@@ -1,5 +1,6 @@
 import type { PropType } from 'vue';
 
+// eslint-disable-next-line
 type DefaultRow = any;
 
 interface TableProps<T> {
@@ -42,5 +43,5 @@ const defaultProps = {
   },
 };
 
-export { TableProps };
 export default defaultProps;
+export { DefaultRow, TableProps };

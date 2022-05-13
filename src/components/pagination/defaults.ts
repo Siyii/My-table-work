@@ -25,3 +25,4 @@ const defaultProps = {
 };
 
 export default defaultProps;
+export { PaginationProps };

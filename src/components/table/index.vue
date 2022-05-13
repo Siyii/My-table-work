@@ -8,7 +8,7 @@
           :key="`table-head-${index}`"
         >
           {{ col }}
-          <template v-if="sort.key && sort.key === col">
+          <template v-if="sort && sort.key === col">
             <span class="table-head_sort">
               <i
                 class="table-head_sort-caret ascending"
@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, watch, ref, onMounted, toRef } from 'vue';
-import defaultProps from './defaults';
+import { defineComponent, toRefs, watch, ref, toRef } from 'vue';
+import defaultProps, { DefaultRow } from './defaults';
 import { orderBy } from 'lodash';
 
 export default defineComponent({
@@ -54,15 +54,15 @@ export default defineComponent({
   setup(props) {
     const { tableData } = toRefs(props);
     const sort = toRef(props, 'sort');
-    const data = ref([]);
-    (data as any).value = tableData.value;
+    const data = ref<DefaultRow>([]);
+    data.value = tableData.value;
 
-    watch(tableData, (val) => {
-      (data as any).value = tableData.value;
+    watch(tableData, () => {
+      data.value = tableData.value;
     });
 
     const sortColsData = (type: 'asc' | 'desc', key: string) => {
-      (data as any).value = orderBy(tableData.value, [key], [type]);
+      data.value = orderBy(tableData.value, [key], [type]);
     };
 
     if (typeof sort.value !== 'undefined') {
