@@ -41,11 +41,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, toRefs, computed, toRef } from 'vue';
-import defaultProps from './defaults';
+import { defaultProps } from './types';
+// import { jumpToPage, handlePageChange } from './helper';
 
 export default defineComponent({
   name: 'RosePagination',
   props: defaultProps,
+  emits: ['handlePageChange'],
   setup(props, { emit }) {
     const jumpInputValue = ref(1);
     const { total, currentPage } = toRefs(props);
@@ -88,7 +90,7 @@ export default defineComponent({
         newPage =
           page === 'next' ? currentPage.value + 1 : currentPage.value - 1;
       }
-      emit('onPageChange', newPage);
+      emit('handlePageChange', newPage);
     };
 
     const goToPage = () => {
@@ -99,7 +101,7 @@ export default defineComponent({
       page = page > totalPage.value ? totalPage.value : page;
       // 小于1时，取1
       page = page < 1 ? 1 : page;
-      emit('onPageChange', page);
+      emit('handlePageChange', page);
     };
 
     return {

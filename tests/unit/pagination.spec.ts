@@ -31,5 +31,15 @@ describe('Pagination.vue', () => {
       // const totalPage = Math.ceil(this.total / this.pageSize)
       expect(cols.length).toEqual(10);
     });
+
+    it('click prev', () => {});
+
+    it('click next', () => {});
+
+    it('click page', () => {});
+
+    it('input page number', () => {});
+
+    it('page change', () => {});
   });
 });

@@ -44,13 +44,16 @@
 </template>
 
 <script lang="ts">
+/**
+ * v1 2021.05.09
+ */
 import { defineComponent, toRefs, watch, ref, toRef } from 'vue';
-import defaultProps, { DefaultRow } from './defaults';
+import { tableDefaultProps, DefaultRow } from './types';
 import { orderBy } from 'lodash';
 
 export default defineComponent({
   name: 'MyTable',
-  props: defaultProps,
+  props: tableDefaultProps,
   setup(props) {
     const { tableData } = toRefs(props);
     const sort = toRef(props, 'sort');
