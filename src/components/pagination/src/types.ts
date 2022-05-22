@@ -1,10 +1,10 @@
-interface PaginationProps {
+export interface PaginationProps {
   size: number;
   total: number;
   currentPage: number;
 }
 
-const defaultProps = {
+export const defaultProps = {
   // 页码数量
   size: {
     type: Number,
@@ -23,6 +23,3 @@ const defaultProps = {
     type: Number,
   },
 };
-
-export default defaultProps;
-export { PaginationProps };
