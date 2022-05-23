@@ -3,16 +3,47 @@
  * @param order
  * @param prop
  */
-const sort = (prop: string, order: 'asc' | 'desc') => {};
 
-/**
- * 排序改变后触发该事件，抛出当前数据，排序列，排序方式
- */
-const handleSortChange = () => {};
+import { cloneDeep, orderBy } from 'lodash';
+import { SetupContext } from 'vue';
+import { TableSortConf } from '@/components/table';
+import { DefaultRow } from '../types';
 
-/**
- * 清除排序，恢复无序
- */
-const clearSort = () => {};
+export const useSort = (
+  props: TableSortConf | undefined,
+  tableTemp: DefaultRow[],
+  emit: SetupContext['emit']
+) => {
+  const tableData = cloneDeep(tableTemp);
+  let sortedData = [];
 
-export { sort, handleSortChange, clearSort };
+  const sortCb = (order: 'asc' | 'desc', key: string | undefined) => {
+    emit('onSortChange', {
+      order,
+      key,
+    });
+    if (!key) {
+      return;
+    }
+    sortedData = orderBy(tableData, [key], [order]);
+    return sortedData;
+  };
+
+  const clearCb = () => {
+    emit('onSortChange', {
+      order: '',
+      key: '',
+    });
+  };
+
+  if (typeof props !== 'undefined') {
+    const { order, key } = props;
+    sortedData = sortCb(order, key) || [];
+  }
+
+  return {
+    sortedData,
+    sortCb,
+    clearCb,
+  };
+};

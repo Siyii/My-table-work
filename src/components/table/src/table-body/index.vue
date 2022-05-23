@@ -1,7 +1,7 @@
 <template>
   <tbody>
     <tr v-for="(row, index) in data" :key="index">
-      <my-table-body-cell :data="row" :cols="cols" />
+      <my-table-body-cell :data="row" />
     </tr>
   </tbody>
 </template>
@@ -12,8 +12,10 @@ import MyTableBodyCell from './bodyCell.vue';
 
 // TODO type 定义
 const props = {
-  data: [],
-  cols: [],
+  data: {
+    type: Object, // TODO 此处type要定义
+    required: true,
+  },
 };
 
 export default defineComponent({
@@ -27,5 +29,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped></style>

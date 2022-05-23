@@ -3,7 +3,7 @@
     <div class="row justify-content-end">
       <ul class="pagination justify-content-end col-8">
         <li :class="`page-item ${getPageStatus('prev')}`">
-          <a class="page-link btn-next" @click="jumpToPage('prev')">
+          <a class="page-link btn-prev" @click="jumpToPage('prev')">
             <span aria-hidden="true">&laquo; Previous</span>
           </a>
         </li>
@@ -40,77 +40,53 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, computed, toRef } from 'vue';
+import { defineComponent, ref, toRef } from 'vue';
 import { defaultProps } from './types';
-// import { jumpToPage, handlePageChange } from './helper';
+import { usePage } from './composables/usePage';
 
 export default defineComponent({
   name: 'RosePagination',
   props: defaultProps,
-  emits: ['handlePageChange'],
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const jumpInputValue = ref(1);
-    const { total, currentPage } = toRefs(props);
-    const size = toRef(props, 'size');
+    const currentPage = toRef(props, 'currentPage');
 
-    if (!size.value) {
-      size.value = 10;
-    }
-
-    // 处理页数
-    const totalPage = computed(() => {
-      if (total.value) {
-        return Math.ceil(total.value / size.value);
-      }
-      return 0;
-    });
+    const pageContext = usePage(props, emit);
+    const totalPage = pageContext.totalPage;
 
     // 计算当前按钮的样式状态
     const getPageStatus = (page: string | number) => {
-      if (!currentPage.value) {
-        return '';
-      }
       if (typeof page === 'number') {
         return currentPage.value === page ? 'active' : '';
       }
       if (page === 'next') {
         // 当前页数为页数时不能下一页
-        return currentPage.value === totalPage.value ? 'disabled' : '';
+        return currentPage.value === totalPage ? 'disabled' : '';
       }
       // 当前页数是第一页时不能前一页
       return currentPage.value === 1 ? 'disabled' : '';
     };
 
-    const jumpToPage = (page: string | number) => {
-      if (!currentPage.value) {
-        return;
-      }
-      let newPage = page;
-      if (typeof page === 'string') {
-        newPage =
-          page === 'next' ? currentPage.value + 1 : currentPage.value - 1;
-      }
-      emit('handlePageChange', newPage);
+    const jumpToPage = (page: 'prev' | 'next' | number) => {
+      pageContext.jumpNewPage(page, currentPage.value);
     };
 
     const goToPage = () => {
-      // 对输入的数字向上取整，以防输入小数
-      let page = Math.floor(jumpInputValue.value);
-
-      // 大于最大页数时，取最大页数
-      page = page > totalPage.value ? totalPage.value : page;
-      // 小于1时，取1
-      page = page < 1 ? 1 : page;
-      emit('handlePageChange', page);
+      let page = pageContext.inputJumpPage(jumpInputValue.value);
+      jumpInputValue.value = page;
     };
+
+    expose({
+      jumpToPage: jumpToPage,
+    });
 
     return {
       totalPage,
       currentPage,
       jumpInputValue,
       getPageStatus,
-      jumpToPage,
       goToPage,
+      jumpToPage,
     };
   },
 });
