@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <my-table
-      ref="table"
+      ref="tableRef"
       :tableData="realTableData"
       :sort="sortConfig"
-      @handleSortChange="onSortChange"
+      @onSortChange="onSortChange"
     >
       <my-table-column prop="name" label="名字">
         <!-- 自定义某一列的表头 -->
@@ -29,18 +29,18 @@
     <!-- <template #body>222</template> -->
 
     <my-pagination
-      ref="pagination"
+      ref="paginationRef"
       :size="size"
       :total="tableData.length"
       :currentPage="currentPage"
-      @handlePageChange="onPageChange"
+      @onPageChange="onPageChange"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-/* eslint-disable */
-import { ref, computed } from 'vue';
+// /* eslint-disable */
+import { ref, computed, onMounted } from 'vue';
 import { MyTable } from '@/components/table';
 import { MyTableColumn } from '@/components/table';
 import { MyPagination } from '@/components/pagination';
@@ -86,44 +86,32 @@ const realTableData = computed(() => {
 });
 
 /**
- * table 对外暴露 api 使用 demo
+ * table、pagination 对外暴露 api 使用 demo
  */
-const tableRef = ref(null);
+const tableRef = ref<InstanceType<typeof MyTable>>();
+const paginationRef = ref<InstanceType<typeof MyPagination>>();
 
-// 对某一列进行降序
-const sortCols = (order: TableSortConf['order'], key: string) => {
-  tableRef.value!.sort(order, key);
-};
-
-// 清除排序状态恢复无序
-const clearSort = () => {
-  tableRef.value!.clearSort();
-};
+onMounted(() => {
+  // 指定年龄进行升序
+  tableRef.value.sort('asc', 'age');
+  // 清除排序状态恢复无序,
+  tableRef.value.clearSort();
+  // // 跳到第五页
+  paginationRef.value.jumpToPage(5);
+});
 
 // 排序数据改变触发事件
-const onSortChange = (order: TableSortConf['order'], key: string, data: []) => {
-  // 获取当前数据
+const onSortChange = (data: TableSortConf) => {
+  let { order, key } = data;
+  // 用法：向接口请求排序后的表格数据(这样可以对所有数据进行排序)
+  console.log('onSortChange', order, key);
 };
 
-/**
- * pagination 对外暴露 api 使用 demo
- */
-const paginationRef = ref(null);
-
-// 跳到前一页/后一页/某一页
-const jumpPage = (data: 'prev' | 'next' | number) => {
-  if (typeof data === 'string') {
-    paginationRef.value!.jumpToPage(data);
-    return;
-  }
-
-  paginationRef.value!.jumpToPage(data);
-};
-
-// 页码改变触发事件
+// 页码改变触发事件，用于监听当前页数，处理分页数据
 const onPageChange = (page: number) => {
   // 获取当前页码
   currentPage.value = page;
+  console.log('onPageChange', page);
 };
 </script>
 

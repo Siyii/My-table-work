@@ -2,28 +2,27 @@
   <table class="table">
     <!-- 表头插槽 -->
     <slot name="header">
-      <my-table-header
-        :data="columnData"
-        :rootProps="props"
-        @sort="sortColsData"
-      />
+      <my-table-header :rootProps="props" @sort="sortColsData" />
     </slot>
-
     <!-- 表格空状态 -->
     <slot name="body">
       <template v-if="data.length === 0">
         <!-- 表格空状态 -->
         <slot name="empty">
-          <my-table-empty :rootProps="props" :length="columnData.length" />
+          <my-table-empty
+            :emptyText="props.emptyText"
+            :length="columnData.length"
+          />
         </slot>
       </template>
       <template v-else>
-        <my-table-body :data="data" :cols="columnData"></my-table-body>
+        <my-table-body :data="data"></my-table-body>
       </template>
     </slot>
   </table>
 </template>
-<script lang="tsx">
+
+<script lang="ts">
 /**
  * v2 2021.05.15
  */
@@ -35,12 +34,15 @@ import {
   toRefs,
   ref,
   watch,
+  provide,
 } from 'vue';
 import { tableDefaultProps, DefaultRow } from './types';
-import { orderBy, cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash';
 import MyTableHeader from './table-header/index.vue';
 import MyTableEmpty from './table-body/empty.vue';
 import MyTableBody from './table-body/index.vue';
+
+import { useSort } from './composables/useSort';
 
 export default defineComponent({
   name: 'MyTable',
@@ -50,42 +52,57 @@ export default defineComponent({
     MyTableBody,
     MyTableEmpty,
   },
-  emits: ['handleSortChange'],
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const { tableData } = toRefs(props);
     const sort = toRef(props, 'sort');
     const data = ref<DefaultRow>([]);
-    data.value = cloneDeep(tableData.value);
 
     watch(tableData, () => {
       data.value = tableData.value;
     });
 
-    // 排序
-    // 分页
+    const reSetData = () => {
+      data.value = cloneDeep(tableData.value);
+    };
+    reSetData();
 
+    let sortContext = useSort(sort.value, data.value, emit);
+    if (typeof sort.value !== 'undefined') {
+      data.value = sortContext.sortedData;
+    }
     const sortColsData = (order: 'asc' | 'desc', key: string | undefined) => {
-      if (!key) {
-        return;
-      }
-      data.value = orderBy(tableData.value, [key], [order]);
-      emit('handleSortChange', order, key, data);
+      data.value = sortContext.sortCb(order, key);
     };
 
-    if (typeof sort.value !== 'undefined') {
-      sortColsData(sort.value.order, sort.value.key);
-    }
+    expose({
+      sort: sortColsData,
+      clearSort: () => {
+        sortContext.clearCb();
+        reSetData();
+      },
+    });
 
     const getChildren = () => {
       const instance = getCurrentInstance();
-      console.log('object :>> instance', instance);
-      const columnData = instance?.slots.default?.() || [];
-      return columnData;
-    };
-    const columnData = getChildren();
-    console.log('object :>> columnData', columnData);
 
-    // 异常场景处理
+      const columnData = instance?.slots.default?.() || [];
+      return { instance, columnData };
+    };
+    const { instance, columnData } = getChildren();
+    provide('colsData', columnData);
+
+    // 异常场景处理: 没有配置表格列，进行异常提示
+    const expectError = () => {
+      const isSlotsExist = instance?.slots.header && instance?.slots.body;
+      if (
+        columnData.length === 0 &&
+        tableData.value.length > 0 &&
+        !isSlotsExist
+      ) {
+        throw '没有配置表格列或插槽，数据无法正常显示';
+      }
+    };
+    expectError();
 
     return {
       data,

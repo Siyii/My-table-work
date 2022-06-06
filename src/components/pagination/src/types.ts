@@ -13,13 +13,13 @@ export const defaultProps = {
 
   // 总条目数
   total: {
-    require: true,
+    required: true,
     type: Number,
   },
 
   // 当前页码
   currentPage: {
-    require: true,
+    required: true,
     type: Number,
   },
 };

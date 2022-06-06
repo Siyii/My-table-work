@@ -9,18 +9,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from 'vue';
-import MyHeaderCell from './headCell.vue';
+import { defineComponent, toRefs, inject } from 'vue';
+import MyHeaderCell from './headCell';
 
 const props = {
-  // 列的实例信息
-  data: {
-    type: Object, // TODO 此处type要定义
-    default: () => ({}),
-  },
   rootProps: {
     type: Object,
-    default: () => ({}),
+    required: true,
   },
 };
 
@@ -32,7 +27,8 @@ export default defineComponent({
     MyHeaderCell,
   },
   setup(props, { emit }) {
-    const { data, rootProps } = toRefs(props);
+    const { rootProps } = toRefs(props);
+    const data = inject('colsData');
 
     const sort = (order: 'asc' | 'desc', key: string | undefined) => {
       emit('sort', order, key);
@@ -47,7 +43,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .table-head_sort {
   display: inline-flex;
   flex-direction: column;

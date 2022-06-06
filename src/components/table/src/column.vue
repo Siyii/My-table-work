@@ -6,8 +6,5 @@ export default defineComponent({
   name: 'MyColumn',
   props: columnDefaultProps,
   slots: ['header'],
-  render() {
-    return null;
-  },
 });
 </script>

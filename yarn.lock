@@ -1304,6 +1304,11 @@
   "resolved" "https://registry.npmmirror.com/@polka/url/-/url-1.0.0-next.21.tgz"
   "version" "1.0.0-next.21"
 
+"@popperjs/core@^2.10.2", "@popperjs/core@^2.11.5":
+  "integrity" "sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw=="
+  "resolved" "https://registry.npmmirror.com/@popperjs/core/-/core-2.11.5.tgz"
+  "version" "2.11.5"
+
 "@sideway/address@^4.1.3":
   "integrity" "sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw=="
   "resolved" "https://registry.npmmirror.com/@sideway/address/-/address-4.1.4.tgz"
@@ -1514,10 +1519,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^27.0.0", "@types/jest@^27.0.1":
-  "integrity" "sha512-23iPJADSmicDVrWk+HT58LMJtzLAnB2AgIzplQuq/bSrGaxCrlvRFjGbXmamnnk/mAmCdLStiGqggu28ocUyiw=="
-  "resolved" "https://registry.npmmirror.com/@types/jest/-/jest-27.4.1.tgz"
-  "version" "27.4.1"
+"@types/jest@^27.0.0", "@types/jest@^27.0.1", "@types/jest@^27.5.1":
+  "integrity" "sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ=="
+  "resolved" "https://registry.npmmirror.com/@types/jest/-/jest-27.5.1.tgz"
+  "version" "27.5.1"
   dependencies:
     "jest-matcher-utils" "^27.0.0"
     "pretty-format" "^27.0.0"
@@ -1526,6 +1531,11 @@
   "integrity" "sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ=="
   "resolved" "https://registry.npmmirror.com/@types/json-schema/-/json-schema-7.0.11.tgz"
   "version" "7.0.11"
+
+"@types/lodash@^4.14.182":
+  "integrity" "sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q=="
+  "resolved" "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.182.tgz"
+  "version" "4.14.182"
 
 "@types/mime@^1":
   "integrity" "sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw=="
@@ -1735,7 +1745,7 @@
   "resolved" "https://registry.npmmirror.com/@vue/babel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.0.2.tgz"
   "version" "1.0.2"
 
-"@vue/babel-plugin-jsx@^1.0.3":
+"@vue/babel-plugin-jsx@^1.0.3", "@vue/babel-plugin-jsx@^1.1.1":
   "integrity" "sha512-j2uVfZjnB5+zkcbc/zsOc0fSNGCMMjaEXP52wdwdIfn0qjFfEYpYZBFKFg+HHnQeJCVrjOeO0YxgaL7DMrym9w=="
   "resolved" "https://registry.npmmirror.com/@vue/babel-plugin-jsx/-/babel-plugin-jsx-1.1.1.tgz"
   "version" "1.1.1"
@@ -2520,13 +2530,13 @@
   "resolved" "https://registry.npmmirror.com/at-least-node/-/at-least-node-1.0.0.tgz"
   "version" "1.0.0"
 
-"autoprefixer@^10.2.4":
-  "integrity" "sha512-ypHju4Y2Oav95SipEcCcI5J7CGPuvz8oat7sUtYj3ClK44bldfvtvcxK6IEK++7rqB7YchDGzweZIBG+SD0ZAA=="
-  "resolved" "https://registry.npmmirror.com/autoprefixer/-/autoprefixer-10.4.7.tgz"
-  "version" "10.4.7"
+"autoprefixer@^10.2.4", "autoprefixer@10.4.5":
+  "integrity" "sha512-Fvd8yCoA7lNX/OUllvS+aS1I7WRBclGXsepbvT8ZaPgrH24rgXpZzF0/6Hh3ZEkwg+0AES/Osd196VZmYoEFtw=="
+  "resolved" "https://registry.npmmirror.com/autoprefixer/-/autoprefixer-10.4.5.tgz"
+  "version" "10.4.5"
   dependencies:
-    "browserslist" "^4.20.3"
-    "caniuse-lite" "^1.0.30001335"
+    "browserslist" "^4.20.2"
+    "caniuse-lite" "^1.0.30001332"
     "fraction.js" "^4.2.0"
     "normalize-range" "^0.1.2"
     "picocolors" "^1.0.0"
@@ -2706,6 +2716,11 @@
   "resolved" "https://registry.npmmirror.com/boolbase/-/boolbase-1.0.0.tgz"
   "version" "1.0.0"
 
+"bootstrap@^5.1.3":
+  "integrity" "sha512-fcQztozJ8jToQWXxVuEyXWW+dSo8AiXWKwiSSrKWsRB/Qt+Ewwza+JWoLKiTuQLaEPhdNAJ7+Dosc9DOIqNy7Q=="
+  "resolved" "https://registry.npmmirror.com/bootstrap/-/bootstrap-5.1.3.tgz"
+  "version" "5.1.3"
+
 "brace-expansion@^1.1.7":
   "integrity" "sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA=="
   "resolved" "https://registry.npmmirror.com/brace-expansion/-/brace-expansion-1.1.11.tgz"
@@ -2820,7 +2835,7 @@
     "lodash.memoize" "^4.1.2"
     "lodash.uniq" "^4.5.0"
 
-"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001332", "caniuse-lite@^1.0.30001335":
+"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001332":
   "integrity" "sha512-ddP1Tgm7z2iIxu6QTtbZUv6HJxSaV/PZeSrWFZtbY4JZ69tOeNhBCl3HyRQgeNZKE5AOn1kpV7fhljigy0Ty3w=="
   "resolved" "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001335.tgz"
   "version" "1.0.30001335"
@@ -3224,7 +3239,7 @@
   "resolved" "https://registry.npmmirror.com/css-declaration-sorter/-/css-declaration-sorter-6.2.2.tgz"
   "version" "6.2.2"
 
-"css-loader@*", "css-loader@^6.5.0":
+"css-loader@^6.5.0":
   "integrity" "sha512-yB5CNFa14MbPJcomwNh3wLThtkZgcNyI2bNMRt8iE5Z8Vwl7f8vQXFAzn2HDOJvtDq2NTZBUGMSUNNyrv3/+cw=="
   "resolved" "https://registry.npmmirror.com/css-loader/-/css-loader-6.7.1.tgz"
   "version" "6.7.1"
@@ -7591,10 +7606,10 @@
   "resolved" "https://registry.npmmirror.com/tr46/-/tr46-0.0.3.tgz"
   "version" "0.0.3"
 
-"ts-jest@^27.0.4", "ts-jest@27.x":
-  "integrity" "sha512-qjkZlVPWVctAezwsOD1OPzbZ+k7zA5z3oxII4dGdZo5ggX/PL7kvwTM0pXTr10fAtbiVpJaL3bWd502zAhpgSQ=="
-  "resolved" "https://registry.npmmirror.com/ts-jest/-/ts-jest-27.1.4.tgz"
-  "version" "27.1.4"
+"ts-jest@^27.0.4", "ts-jest@^27.1.5", "ts-jest@27.x":
+  "integrity" "sha512-Xv6jBQPoBEvBq/5i2TeSG9tt/nqkbpcurrEG1b+2yfBrcJelOZF9Ml6dmyMh7bcW9JyFbRYpR5rxROSlBLTZHA=="
+  "resolved" "https://registry.npmmirror.com/ts-jest/-/ts-jest-27.1.5.tgz"
+  "version" "27.1.5"
   dependencies:
     "bs-logger" "0.x"
     "fast-json-stable-stringify" "2.x"
@@ -8008,7 +8023,7 @@
   "resolved" "https://registry.npmmirror.com/webpack-virtual-modules/-/webpack-virtual-modules-0.4.3.tgz"
   "version" "0.4.3"
 
-"webpack@^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0", "webpack@^3.0.0 || ^4.1.0 || ^5.0.0-0", "webpack@^4.0.0 || ^5.0.0", "webpack@^4.1.0 || ^5.0.0-0", "webpack@^4.27.0 || ^5.0.0", "webpack@^4.37.0 || ^5.0.0", "webpack@^5.0.0", "webpack@^5.1.0", "webpack@^5.20.0", "webpack@^5.54.0", "webpack@>= 4", "webpack@>=2":
+"webpack@^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0", "webpack@^4.0.0 || ^5.0.0", "webpack@^4.1.0 || ^5.0.0-0", "webpack@^4.27.0 || ^5.0.0", "webpack@^4.37.0 || ^5.0.0", "webpack@^5.0.0", "webpack@^5.1.0", "webpack@^5.20.0", "webpack@^5.54.0", "webpack@>= 4", "webpack@>=2":
   "integrity" "sha512-qmSmbspI0Qo5ld49htys8GY9XhS9CGqFoHTsOVAnjBdg0Zn79y135R+k4IR4rKK6+eKaabMhJwiVB7xw0SJu5w=="
   "resolved" "https://registry.npmmirror.com/webpack/-/webpack-5.72.0.tgz"
   "version" "5.72.0"

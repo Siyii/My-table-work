@@ -1,23 +1,27 @@
 <template>
-  <td v-for="(col, index) in cols" :key="index">
+  <td v-for="(col, index) in colsData" :key="index">
     {{ data[col.props.prop] }}
   </td>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 
-// TODO type 定义
 const props = {
-  data: {},
-  cols: [],
+  data: {
+    type: Object, // TODO 此处type要定义
+    required: true,
+  },
 };
 
 export default defineComponent({
   name: 'MyTableBodyCell',
   props: props,
   setup() {
-    return {};
+    const colsData = inject('colsData');
+    return {
+      colsData,
+    };
   },
 });
 </script>
